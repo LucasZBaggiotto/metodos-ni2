@@ -1,0 +1,464 @@
+Priorização comercial de uma carteira bancária
+
+Métodos de Tomada de Decisão · Trabalho NI2
+
+Relatório explicativo e guia de apresentação
+
+Dez alternativas, quatro critérios e sensibilidade às preferências
+
+Professor: Guilherme Dean Pelegrina · Novembro de 2026
+
+Como usar este material
+
+O relatório explica o problema, as entradas, as transformações e os resultados de cada método. Ele complementa a apresentação e a memória de cálculo em Excel: a leitura deve permitir refazer uma conta, interpretar uma classificação e responder por que os métodos podem discordar.
+
+Os resultados com AHP utilizam a matriz revisada, com C3/C2 = 4 e C2/C3 = 1/4. A matriz inicial é apresentada apenas para explicar a mudança de consistência. Os cenários CRITIC e SMAA são análises alternativas, não uma média entre métodos.
+
+Resultado central
+
+L10 ocupa a primeira posição em SAW, TOPSIS e PROMETHEE II com os pesos AHP revisados. L04 é a principal concorrente quando aumenta a importância dos dias com aplicações. A conclusão é condicionada à base, aos sentidos e às preferências adotados; não é uma regra universal nem uma implantação operacional.
+
+A base usa identificadores L01–L10. O período da base é 01/08/2026–31/08/2026, conforme esclarecimento de Leopoldo. C3 é a média de todos os valores de aplicações/resgates dentro de um mês. A data de extração não foi informada; os agregados não foram recalculados a partir das transações.
+
+1. Problema, decisor e delimitação
+
+O problema é ordenar o atendimento diário das demandas de uma carteira bancária. O decisor considerado é o banqueiro responsável pelas contas. As dez alternativas representam casos de grande impacto nos números da companhia no mês, segundo a contextualização da base. Portanto, não se trata de amostra aleatória de toda a carteira.
+
+A decisão não é simplesmente escolher o maior cliente. Custódia, presença de aplicações, valor médio e dias com resgates apontam para características diferentes. A análise multicritério torna explícitas as compensações: uma alternativa pode compensar menor frequência de aplicações com maior custódia ou menor frequência de resgates.
+
+A prioridade modelada é comercial. Não há variáveis de urgência, prazo de atendimento, esforço, elegibilidade, risco ou disponibilidade do profissional. Assim, o ranking não determina sozinho quem será atendido, qual produto será ofertado ou a concessão de crédito. Sem capacidade quantificada, tampouco é possível converter a ordem em uma agenda ótima.
+
+
+Critério | Definição e unidade | Sentido
+C1 | Custódia em 01/08/2026; R$ milhões | Maximizar
+C2 | Dias com aplicações em agosto/2026 | Maximizar
+C3 | Média dos valores de aplicações/resgates no mês; R$ milhões | Maximizar
+C4 | Dias com resgates em agosto/2026 | Minimizar
+C2 e C4 são dias com movimentação, não quantidade de transações. O valor 22 indica dias com ocorrência. Segundo Leopoldo, C3 é a “média de todos os valores de aplicação/resgates dentro de um mês”, referente a agosto/2026. Mantivemos os agregados recebidos, sem reconstruir a média: não foram fornecidos microdados, convenção de sinais ou tratamento de movimentos. Não inferimos volume total por C2 × C3. C4 mede frequência, não volume resgatado.
+
+Os sentidos C1/C2/C3 para maximizar e C4 para minimizar são preferências do estudo. Menos dias de resgate não é, por si só, uma verdade universal de melhor atendimento: esta orientação deve ser entendida no objetivo comercial declarado.
+
+Sequência da análise
+
+1) Conferir a matriz; 2) orientar e normalizar; 3) extrair pesos por AHP ou CRITIC; 4) calcular SAW, TOPSIS e PROMETHEE II; 5) comparar classificações; 6) variar os pesos com SMAA e um teste local; 7) formular uma recomendação condicional.
+
+2. Dados e qualidade da informação
+
+
+Alternativa | C1: R$ mi | C2: dias | C3: R$ mi (média) | C4: dias
+L01 | 400,0 | 22,0 | 20,0 | 22,0
+L02 | 230,0 | 12,0 | 5,0 | 8,0
+L03 | 500,0 | 7,0 | 3,5 | 5,0
+L04 | 1200,0 | 22,0 | 12,0 | 22,0
+L05 | 900,0 | 22,0 | 10,0 | 22,0
+L06 | 200,0 | 22,0 | 0,6 | 22,0
+L07 | 350,0 | 4,0 | 1,0 | 4,0
+L08 | 70,0 | 6,0 | 30,0 | 5,0
+L09 | 600,0 | 3,0 | 6,0 | 1,0
+L10 | 1300,0 | 10,0 | 15,0 | 12,0
+Fonte: matriz interna fornecida para o estudo, com 40 valores. Os valores monetários são expressos em milhões de reais. A divulgação da instituição, do sistema de origem e de identificadores reais de clientes não é necessária para o exercício matemático; a autorização de uso acadêmico ainda deve ser documentada.
+
+Por que estas lacunas importam?
+
+O período e a definição conceitual de C3 foram esclarecidos. Sem data de extração e transações individuais, não foi possível auditar a agregação de C3 nem a atualização da base. Sem restrições de atendimento, uma alternativa com alta pontuação pode ser inviável em um dia específico. A precisão de quatro casas decimais no resultado não elimina nenhuma dessas incertezas.
+
+As duas variáveis de frequência também merecem atenção: a correlação bruta entre C2 e C4 é +0,9842. Clientes que aparecem em muitos dias de aplicação também tendem a aparecer em muitos dias de resgate nesta amostra. Como os sentidos são opostos, a correlação após orientação passa a −0,9842.
+
+Dominância antes de ponderar
+
+Com os sentidos adotados, L04 domina L05 e L06; L05 domina L06; L01 domina L06. Dominar significa ser pelo menos tão boa em todos os critérios e estritamente melhor em algum. L10 não domina L04, pois possui menos dias com aplicações (10 contra 22). A preferência entre ambas exige pesos ou outra regra de agregação.
+
+3. Normalização: tornar os critérios comparáveis
+
+A soma direta dos valores brutos seria inadequada: custódia varia de 70 a 1.300, enquanto dias de resgate variam de 1 a 22. O tamanho da escala passaria a atuar como peso implícito. Para SAW, CRITIC e a versão aditiva de SMAA, foi usada normalização min–max com orientação para benefício.
+
+Benefício: r(i,j) = [x(i,j) − mínimo(j)] / [máximo(j) − mínimo(j)]
+
+Custo: r(i,j) = [máximo(j) − x(i,j)] / [máximo(j) − mínimo(j)]
+
+Assim, 1 representa o melhor valor observado do critério e 0 o pior. Não é uma meta externa nem a probabilidade de sucesso. Se máximo e mínimo fossem iguais, seria necessário tratar separadamente o critério constante; isso não ocorre nesta base.
+
+
+Alternativa | C1 | C2 | C3 | C4 orientado
+L01 | 0,2683 | 1,0000 | 0,6599 | 0,0000
+L02 | 0,1301 | 0,4737 | 0,1497 | 0,6667
+L03 | 0,3496 | 0,2105 | 0,0986 | 0,8095
+L04 | 0,9187 | 1,0000 | 0,3878 | 0,0000
+L05 | 0,6748 | 1,0000 | 0,3197 | 0,0000
+L06 | 0,1057 | 1,0000 | 0,0000 | 0,0000
+L07 | 0,2276 | 0,0526 | 0,0136 | 0,8571
+L08 | 0,0000 | 0,1579 | 1,0000 | 0,8095
+L09 | 0,4309 | 0,0000 | 0,1837 | 1,0000
+L10 | 1,0000 | 0,3684 | 0,4898 | 0,4762
+Exemplo: L10
+
+Custódia: (1.300 − 70)/(1.300 − 70) = 1. Dias com aplicações: (10 − 3)/(22 − 3) = 0,3684. Valor médio: (15 − 0,6)/(30 − 0,6) = 0,4898. Dias com resgates: (22 − 12)/(22 − 1) = 0,4762.
+
+No TOPSIS, a normalização é vetorial, não min–max. No PROMETHEE usual, a orientação é usada para comparar qual valor é melhor; a magnitude da diferença não entra na preferência binária.
+
+4. AHP: transformar julgamentos em pesos
+
+O AHP compara os quatro critérios dois a dois. A entrada a(i,j) indica a importância do critério i em relação ao critério j. A diagonal vale 1 e a matriz é recíproca: a(j,i) = 1/a(i,j). Há seis julgamentos independentes para quatro critérios.
+
+
+ | C1 | C2 | C3 | C4
+C1 | 1 | 7 | 5 | 9
+C2 | 1/7 | 1 | 1/4 | 3
+C3 | 1/5 | 4 | 1 | 6
+C4 | 1/9 | 1/3 | 1/6 | 1
+A versão revisada altera apenas C3/C2, de 6 para 4, e seu recíproco, de 1/6 para 1/4. Não se deve ajustar comparações apenas para obter uma consistência conveniente: uma revisão precisa representar o julgamento do decisor. Esta matriz revisada é a utilizada na análise final.
+
+A × w = λmáx × w, com soma(w) = 1 e w(j) > 0
+
+Os pesos são o autovetor principal à direita. Uma forma de obter o vetor é começar com pesos iguais, multiplicar pela matriz A, dividir pelo total e repetir até estabilizar. Após convergir, os quocientes (A×w)(j)/w(j) se aproximam do mesmo autovalor λmáx. A planilha apresenta os passos de cálculo para permitir auditoria.
+
+
+Critério | Peso inicial | Peso revisado
+C1 | 63,6253% | 64,8165%
+C2 | 7,5939% | 8,5256%
+C3 | 24,6917% | 22,4049%
+C4 | 4,0891% | 4,2529%
+C1 + C3 recebem 87,2215% do peso revisado. Isso explica por que o cenário AHP favorece alternativas com grande custódia e valor médio, em vez de privilegiar somente frequência. Os pesos não são contribuição financeira efetiva de cada critério nem participação da receita da empresa.
+
+5. AHP: consistência e interpretação
+
+IC = (λmáx − n)/(n − 1) ; RC = IC/IR
+
+Com n = 4, foi utilizado IR = 0,90 e a referência RC ≤ 0,10. A razão de consistência avalia a coerência relativa dos julgamentos par a par, não a qualidade da base ou a adequação do objetivo de decisão.
+
+
+Indicador | Matriz inicial | Matriz revisada
+λmáx | 4,354284 | 4,239609
+IC | 0,118095 | 0,079870
+IR | 0,90 | 0,90
+RC | 13,1216% | 8,8744%
+Na matriz revisada, IC = (4,239609 − 4)/3 = 0,079870; RC = 0,079870/0,90 = 0,088744, ou 8,8744%. A revisão reduz a RC inicial de cerca de 13,12% para um valor abaixo da referência de 10%.
+
+O que mudou e o que não mudou
+
+C2 aumenta de cerca de 7,59% para 8,53%, enquanto C3 cai de 24,69% para 22,40%. C1 permanece claramente dominante. L10 continua em primeiro lugar nos métodos calculados com AHP, mas a estabilidade do vencedor em duas matrizes próximas não prova robustez a toda preferência possível.
+
+Resposta curta para a apresentação
+
+“Usamos seis julgamentos para quatro critérios. A matriz inicial ultrapassou a referência de consistência. A revisão do par C3/C2 reduziu a razão para 8,87%, e os pesos foram calculados pelo autovetor principal. Isso melhora a coerência dos julgamentos, mas não valida automaticamente os dados.”
+
+Referência metodológica: Saaty (2008).
+
+6. SAW: soma ponderada e compensações
+
+S(i) = soma[j] de w(j) × r(i,j)
+
+O SAW multiplica cada valor min–max orientado pelo peso correspondente e soma as quatro contribuições. A alternativa de maior pontuação é preferida. O modelo é compensatório: uma desvantagem em um critério pode ser compensada por vantagens nos demais.
+
+
+Alternativa | C1 ponderado | C2 ponderado | C3 ponderado | C4 ponderado | SAW | Posto
+L01 | 0,1739 | 0,0853 | 0,1478 | 0,0000 | 0,4070 | 4
+L02 | 0,0843 | 0,0404 | 0,0335 | 0,0284 | 0,1866 | 9
+L03 | 0,2266 | 0,0179 | 0,0221 | 0,0344 | 0,3011 | 6
+L04 | 0,5955 | 0,0853 | 0,0869 | 0,0000 | 0,7676 | 2
+L05 | 0,4374 | 0,0853 | 0,0716 | 0,0000 | 0,5943 | 3
+L06 | 0,0685 | 0,0853 | 0,0000 | 0,0000 | 0,1538 | 10
+L07 | 0,1475 | 0,0045 | 0,0030 | 0,0365 | 0,1915 | 8
+L08 | 0,0000 | 0,0135 | 0,2240 | 0,0344 | 0,2719 | 7
+L09 | 0,2793 | 0,0000 | 0,0412 | 0,0425 | 0,3630 | 5
+L10 | 0,6482 | 0,0314 | 0,1097 | 0,0203 | 0,8096 | 1
+Por que L10 ganha de L04?
+
+
+Critério | Diferença normalizada L10 − L04 | Contribuição ponderada
+C1 | 0,081301 | +0,052696
+C2 | -0,631579 | -0,053846
+C3 | 0,102041 | +0,022862
+C4 | 0,476190 | +0,020252
+O saldo é +0,041965 para L10. A maior custódia, o maior valor médio e os menores dias de resgate compensam a menor frequência de aplicações. Essa explicação é mais informativa do que dizer apenas que L10 tem a maior nota.
+
+A pontuação 0,8096 não equivale a 80,96% de chance de sucesso. É um índice relativo, calculado com estes limites observados e estes pesos. Alterar a matriz de alternativas também pode alterar os extremos da normalização.
+
+7. TOPSIS: proximidade aos ideais
+
+O TOPSIS organiza a decisão pela proximidade à solução ideal positiva e afastamento da solução ideal negativa. Cada ideal combina os melhores ou piores valores por critério e não precisa corresponder a um cliente real.
+
+z(i,j) = x(i,j) / raiz[soma(i) de x(i,j)²] ; v(i,j) = w(j) × z(i,j)
+
+D+(i) = raiz[soma(j) de (v(i,j) − v+(j))²]
+
+D−(i) = raiz[soma(j) de (v(i,j) − v−(j))²] ; C(i) = D−(i)/(D+(i)+D−(i))
+
+Nos critérios C1, C2 e C3, o ideal positivo é o máximo ponderado. Em C4, é o mínimo, pois menos dias de resgate são preferidos. Para o ideal negativo, invertem-se as escolhas. A maior proximidade C(i) é preferida.
+
+
+Etapa / critério | C1 | C2 | C3 | C4
+Norma vetorial | 2220,4279 | 47,8539 | 42,9373 | 47,0213
+Ideal positivo | 0,379483 | 0,039195 | 0,156542 | 0,000904
+Ideal negativo | 0,020434 | 0,005345 | 0,003131 | 0,019898
+
+Alternativa | D+ | D− | Proximidade | Posto
+L01 | 0,268524 | 0,143781 | 0,348725 | 5
+L02 | 0,339019 | 0,055911 | 0,141571 | 9
+L03 | 0,272734 | 0,127561 | 0,318668 | 6
+L04 | 0,100174 | 0,336884 | 0,770800 | 2
+L05 | 0,157753 | 0,249507 | 0,612649 | 3
+L06 | 0,356373 | 0,050852 | 0,124874 | 10
+L07 | 0,317550 | 0,083386 | 0,207978 | 8
+L08 | 0,360197 | 0,154272 | 0,299867 | 7
+L09 | 0,242039 | 0,158400 | 0,395566 | 4
+L10 | 0,081746 | 0,367151 | 0,817896 | 1
+Exemplo L10: a normalização vetorial gera z = (0,585473; 0,208969; 0,349347; 0,255204); após multiplicar pelos pesos, v = (0,379483; 0,017816; 0,078271; 0,010854). Subtrair os ideais, elevar as diferenças ao quadrado, somar e extrair a raiz produz as distâncias da tabela.
+
+L10 atinge 0,8179, seguido de L04 (0,7708) e L05 (0,6126). L09 ultrapassa L01, diferente do SAW. A distância quadrática aos ideais não é a mesma regra de compensação de uma soma linear.
+
+8. CRITIC: pesos derivados da matriz
+
+O CRITIC estima pesos a partir de dispersão e conflito entre critérios. Ele não pergunta ao decisor quanto cada critério importa. Chamá-lo de objetivo significa que a regra é calculada a partir dos dados; não significa que esteja livre de escolhas de modelagem ou que seja superior ao AHP.
+
+I(j) = σ(j) × soma(k) de [1 − correlação(j,k)] ; w(j) = I(j)/soma(k) I(k)
+
+Passos: usar a matriz min–max orientada, calcular o desvio-padrão populacional de cada coluna, calcular a matriz de correlações, somar os conflitos (1 − correlação), multiplicar pelo desvio e normalizar as quantidades de informação. A diagonal da correlação vale 1 e não acrescenta conflito.
+
+
+Critério | Desvio σ | Informação I | Peso CRITIC
+C1 | 0,327638 | 1,004250 | 19,4277%
+C2 | 0,407682 | 1,506070 | 29,1356%
+C3 | 0,300525 | 0,908206 | 17,5696%
+C4 | 0,397868 | 1,750651 | 33,8671%
+
+Correlação orientada | C1 | C2 | C3 | C4
+C1 | 1,0000 | 0,2412 | 0,0193 | -0,3256
+C2 | 0,2412 | 1,0000 | 0,0488 | -0,9842
+C3 | 0,0193 | 0,0488 | 1,0000 | -0,0902
+C4 | -0,3256 | -0,9842 | -0,0902 | 1,0000
+C2 e C4 recebem juntos 63,0027%. A correlação bruta positiva se torna negativa após orientar C4: o método interpreta esse contraste como conflito. Isso não elimina automaticamente redundância nem representa a preferência comercial do banqueiro.
+
+Exemplo C1: I1 = 0,327638 × (0 + 0,758776 + 0,980692 + 1,325649) = 1,004250. A soma das quatro informações é 5,169177; logo, w1 = 1,004250/5,169177 = 19,4277%. Os cálculos usam precisão completa, não os valores intermediários arredondados aqui.
+
+Efeito no TOPSIS
+
+Com CRITIC, as primeiras posições são L10, L08 e L09. L10 = 0,544935 e L08 = 0,538412, diferença de apenas 0,006522. Embora L10 permaneça em primeiro, a vantagem é muito menor e a explicação muda.
+
+Referência metodológica: Diakoulaki, Mavrotas e Papayannakis (1995).
+
+8A. Cenários complementares: separar peso e método
+
+Para isolar o efeito da ponderação, também calculamos TOPSIS com pesos iguais e SAW com pesos CRITIC. Os dados, os sentidos e a normalização própria de cada método são mantidos. Assim, mudar pesos dentro de um método pode ser interpretado separadamente de mudar a regra de agregação.
+
+TOPSIS com pesos iguais
+
+Cada critério recebe 25%. A normalização vetorial, os ideais e a distância euclidiana são os mesmos procedimentos descritos na seção 7, mas a matriz ponderada e os ideais são recalculados. L10 lidera com 0,587458, seguido de L08 com 0,543458 e L04 com 0,531915. Pesos iguais constituem um cenário de referência; não significam ausência de preferências nem neutralidade.
+
+SAW com pesos CRITIC
+
+Multiplicamos a matriz min–max orientada pelos pesos CRITIC da seção 8. L10 permanece primeira, com 0,548946, seguida de L04 com 0,537965 e L08 com 0,495862. A diferença L10 − L04 diminui de 0,041965 no SAW–AHP para 0,010981 no SAW–CRITIC. L08 sobe do sétimo para o terceiro posto, mostrando a importância da escolha dos pesos.
+
+
+Alternativa | TOPSIS igual | Posto | SAW–CRITIC | Posto
+L01 | 0,489359 | 4 | 0,459415 | 5
+L02 | 0,318943 | 8 | 0,415358 | 8
+L03 | 0,350697 | 7 | 0,420749 | 7
+L04 | 0,531915 | 3 | 0,537965 | 2
+L05 | 0,467255 | 5 | 0,478628 | 4
+L06 | 0,295703 | 10 | 0,311889 | 10
+L07 | 0,313043 | 9 | 0,352240 | 9
+L08 | 0,543458 | 2 | 0,495862 | 3
+L09 | 0,408786 | 6 | 0,454655 | 6
+L10 | 0,587458 | 1 | 0,548946 | 1
+As escalas de SAW e TOPSIS não devem ser comparadas diretamente: uma nota maior em um método não prova desempenho superior ao de outro método. Comparam-se as classificações, as distâncias entre alternativas dentro de cada cenário e a justificativa de cada regra.
+
+9. PROMETHEE II: comparações par a par
+
+O PROMETHEE II compara cada alternativa com todas as demais em cada critério, agrega as preferências e calcula fluxos. Nesta implementação foi assumida a função usual: qualquer melhora gera preferência 1; empate ou desvantagem gera 0. Não há limiares de indiferença ou de preferência.
+
+Pj(a,b) = 1 se r(a,j) > r(b,j); caso contrário, 0
+
+π(a,b) = soma(j) de w(j) × Pj(a,b)
+
+φ+(a) = soma[b ≠ a] π(a,b)/9 ; φ−(a) = soma[b ≠ a] π(b,a)/9
+
+φ(a) = φ+(a) − φ−(a)
+
+O fluxo positivo resume quanto a alternativa supera as outras; o negativo, quanto é superada. O fluxo líquido ordena as dez alternativas. Uma preferência de 1 em um critério não considera se a vantagem é mínima ou muito grande, razão para validar a função antes de uso real.
+
+Exemplo L10 × L04: L10 vence em C1, C3 e C4, portanto π(L10,L04) = w1 + w3 + w4 = 0,914744. L04 vence em C2: π(L04,L10) = 0,085256. A diferença desse par não é o fluxo líquido total; o fluxo exige os outros oito confrontos.
+
+
+Alternativa | Fluxo + | Fluxo − | Fluxo líquido | Posto
+L01 | 0,5441 | 0,4133 | 0,1307 | 5
+L02 | 0,2897 | 0,7103 | -0,4206 | 7
+L03 | 0,4667 | 0,5286 | -0,0620 | 6
+L04 | 0,7824 | 0,1751 | 0,6073 | 2
+L05 | 0,6854 | 0,2720 | 0,4135 | 3
+L06 | 0,1289 | 0,8285 | -0,6997 | 10
+L07 | 0,2882 | 0,7118 | -0,4235 | 8
+L08 | 0,2713 | 0,7239 | -0,4526 | 9
+L09 | 0,5742 | 0,4258 | 0,1484 | 4
+L10 | 0,8792 | 0,1208 | 0,7584 | 1
+L10, L04 e L05 seguem no topo. L08 cai ao nono lugar: a função usual não concede vantagem adicional proporcional ao seu C3 = 30. A soma dos fluxos líquidos é aproximadamente zero, uma verificação importante da implementação.
+
+Referência metodológica: Brans e Vincke (1985).
+
+10. SMAA: variar pesos, não inventar precisão
+
+A análise SMAA-2 aditiva usa a mesma matriz min–max e a função de valor do SAW. Em vez de fixar um único vetor de pesos, calcula a classificação para muitos vetores admissíveis. Não se está aplicando SMAA simultaneamente a TOPSIS e PROMETHEE.
+
+Dois cenários
+
+Livre: os quatro pesos não negativos somam 1 e são amostrados uniformemente no simplex, por Dirichlet(1,1,1,1). Ordenado: os mesmos pesos amostrados são ordenados e associados aos critérios para satisfazer w1 ≥ w3 ≥ w2 ≥ w4. Pela simetria da distribuição, a transformação representa a região de pesos com essa ordem. Ela não fixa as intensidades dos seis julgamentos AHP.
+
+Foram usados 1.000.000 de vetores por cenário, semente 20261106 e gerador NumPy default_rng (PCG64). Para cada vetor: multiplicar a matriz normalizada pelos pesos, ordenar as dez pontuações e contar a posição ocupada por cada alternativa. A aceitabilidade b(i,r) é a fração de sorteios em que i ocupa a posição r.
+
+
+Alternativa | 1º livre | 1º ordenado | Posto médio livre | Posto médio ordenado
+L01 | 9,00% | 0,00% | 4,68 | 4,13
+L02 | 0,34% | 0,00% | 6,78 | 8,38
+L03 | 0,00% | 0,00% | 6,26 | 6,83
+L04 | 30,27% | 38,27% | 3,15 | 1,62
+L05 | 0,00% | 0,00% | 4,77 | 2,99
+L06 | 0,00% | 0,00% | 8,16 | 8,95
+L07 | 0,00% | 0,00% | 8,22 | 9,25
+L08 | 25,99% | 0,00% | 4,55 | 5,87
+L09 | 9,86% | 0,00% | 5,36 | 5,60
+L10 | 24,55% | 61,73% | 3,09 | 1,39
+No cenário livre, L04 tem a maior frequência de primeiro lugar, 30,27%; L10 tem o melhor posto médio, 3,09. São respostas diferentes. No cenário ordenado, L10 lidera em 61,73% dos vetores e L04 em 38,27%. Logo, conhecer a ordem dos pesos muda significativamente a recomendação.
+
+11. SMAA: como interpretar e auditar
+
+b(i,r) = contagem da alternativa i no posto r / N
+
+Posto médio(i) = soma[r = 1 a 10] de r × b(i,r)
+
+Erro-padrão de b(i,1) ≈ raiz[b(i,1) × (1 − b(i,1))/N]
+
+Para L10 no cenário ordenado, o erro-padrão Monte Carlo é 0,0486 ponto percentual. Essa margem quantifica apenas o sorteio de pesos. Não inclui erros da base, eventuais erros de agregação de C3, escolhas de normalização, seleção dos clientes ou mudança do ambiente de decisão.
+
+Frequência zero significa que a alternativa não venceu na amostra simulada. Quando há dominância com pesos estritamente positivos, pode-se demonstrar impossibilidade de primeiro lugar; fora dessas provas analíticas, zero observado não deve ser convertido em “nunca vence”.
+
+O que conferir na memória de cálculo
+
+Os pesos de cada sorteio devem somar 1. No cenário ordenado, a restrição deve valer em todos os sorteios. Cada linha da matriz b deve somar 1, pois uma alternativa ocupa algum posto. Cada coluna também deve somar 1, pois, sem empates relevantes, cada posto é ocupado por uma alternativa em cada sorteio. O posto médio precisa ficar entre 1 e 10.
+
+A simulação é uma análise de aceitabilidade sob hipóteses de pesos, não de probabilidade de sucesso comercial. O número de sorteios reduz erro Monte Carlo, mas não torna as hipóteses mais verdadeiras. A base permanece fixa nos dois cenários.
+
+Conclusão que pode ser dita em voz alta
+
+“Com pesos livres, não existe um vencedor amplamente dominante. Quando incorporamos a ordem de importância dos critérios, L10 passa a liderar na maior parte dos vetores e L04 continua relevante. Isso sustenta uma recomendação condicionada, e não uma certeza absoluta.”
+
+Referência metodológica: Lahdelma e Salminen (2001).
+
+12. Sensibilidade local: quando L04 alcança L10?
+
+Foi realizado um teste específico no SAW: aumentar o peso de C2, mantendo a proporção entre os outros três pesos. É uma trajetória de sensibilidade, não a menor perturbação possível sob qualquer direção nem um teste de TOPSIS ou PROMETHEE.
+
+w2(t) = t ; wj(t) = wj original × (1 − t)/(1 − w2 original), para j ≠ 2
+
+Δ(t) = K × (1 − t) + [r(L10,2) − r(L04,2)] × t
+
+Aqui, K = soma[j ≠ 2] de wj × [r(L10,j) − r(L04,j)] / (1 − w2). Usando a base, K = 0,104740 e a diferença de C2 é -0,631579. Impor Δ(t) = 0 resulta em t = 0,142249, ou 14,2249%.
+
+
+Peso C2 | SAW L10 | SAW L04 | Diferença
+8,5256% | 0,809566 | 0,767601 | 0,041965
+10,0000% | 0,802455 | 0,771347 | 0,031108
+12,0000% | 0,792810 | 0,776428 | 0,016382
+14,2249% | 0,782081 | 0,782081 | 0,000000
+15,0000% | 0,778342 | 0,784050 | -0,005708
+C2 precisa subir de 8,5256% para 14,2249%: aumento de 5,6993 pontos percentuais. Acima do limiar nessa trajetória, L04 supera L10. No limiar, os pesos são C1 = 60,7782%, C2 = 14,2249%, C3 = 21,0090% e C4 = 3,9880%. A ordem C1 ≥ C3 ≥ C2 ≥ C4 continua satisfeita.
+
+Esse resultado conecta a análise determinística à SMAA: mesmo respeitando a ordem dos critérios, há regiões de pesos em que L04 vence. Não basta citar que a ordem das preferências foi respeitada para concluir que L10 sempre será a primeira.
+
+13. Síntese: concordância e divergência
+
+
+Alternativa | SAW / AHP | TOPSIS / AHP | PROMETHEE / AHP | TOPSIS / CRITIC
+L01 | 4 | 5 | 5 | 5
+L02 | 9 | 9 | 7 | 8
+L03 | 6 | 6 | 6 | 6
+L04 | 2 | 2 | 2 | 4
+L05 | 3 | 3 | 3 | 7
+L06 | 10 | 10 | 10 | 10
+L07 | 8 | 8 | 8 | 9
+L08 | 7 | 7 | 9 | 2
+L09 | 5 | 4 | 4 | 3
+L10 | 1 | 1 | 1 | 1
+Os três métodos com pesos AHP concordam no trio L10, L04 e L05, mas não na classificação completa. No SAW, L01 supera L09; em TOPSIS e PROMETHEE ocorre o contrário. L08 fica em sétimo em SAW/TOPSIS com AHP e em nono no PROMETHEE usual; com TOPSIS–CRITIC, sobe para segundo.
+
+Não escolher um método só porque confirma o resultado desejado
+
+SAW explicita compensações lineares. TOPSIS usa distância aos ideais e normalização vetorial. PROMETHEE usual avalia vitórias par a par e não a magnitude da vantagem. CRITIC muda os pesos para enfatizar dispersão e conflito. As diferenças são esperadas e devem ser interpretadas, não eliminadas por média arbitrária de postos.
+
+Recomendação
+
+Para o objetivo comercial e a preferência AHP revisada, L10 é a prioridade indicada. L04 merece atenção como alternativa sensível à importância atribuída a C2. Se o decisor valorizar mais a frequência de aplicações, o resultado pode inverter. Antes de transformar isso em rotina, devem ser definidas restrições, qualidade da base e critérios de exceção.
+
+Uma implantação responsável começaria por validar definições e autorização de uso, registrar julgamentos e restrições e testar a recomendação em um processo acompanhado. A análise apresentada permite compreender prioridades; não mede o ganho operacional de adotar o ranking.
+
+14. Roteiro de apresentação: 15 minutos
+
+Reservar, após a exposição, mais 5 minutos para perguntas e discussão.
+
+
+Tempo | Foco | Mensagem central
+0–2 min | Problema e dados | O que se decide, quem decide, limites da base
+2–5 min | AHP e consistência | Como pesos foram obtidos; RC de 8,87%
+5–8 min | SAW, TOPSIS e PROMETHEE | L10 lidera, mas os métodos não são equivalentes
+8–11 min | CRITIC e SMAA | Outra ponderação muda a ordem e a robustez
+11–13 min | L10 × L04 e sensibilidade | C2 a 14,22% empata as duas nesta trajetória
+13–15 min | Conclusão e limites | Prioridade condicional, não implantação validada
+A divisão de falas entre integrantes pode acompanhar estes blocos, evitando que cada um apenas leia tabelas. Em cada método, responder nesta ordem: qual é a pergunta, quais são as entradas, o que foi calculado e o que o resultado significa. A tabela completa serve de apoio; a fala destaca o contraste mais relevante.
+
+Transições úteis
+
+Do AHP para os rankings: “Depois de obter os pesos, precisamos escolher como agregar as avaliações. Aplicamos três regras e comparamos não só o vencedor, mas também as diferenças.”
+
+Dos rankings para robustez: “A concordância no topo não é suficiente. Vamos verificar se o resultado depende muito da ponderação.”
+
+Para a conclusão: “L10 é a indicação sob as preferências atuais, mas L04 pode assumir a liderança quando C2 ganha importância. A recomendação vem acompanhada das condições que a sustentam.”
+
+Cuidados de linguagem
+
+Não dizer “L10 tem 61,73% de chance de dar certo”, “CRITIC é a verdade objetiva” ou “RC abaixo de 10% comprova o estudo”. Dizer, respectivamente, “lidera em 61,73% dos vetores ordenados simulados”, “pesos derivados da dispersão e conflito da matriz” e “julgamentos passaram pela referência de consistência adotada”.
+
+15. Perguntas prováveis e respostas
+
+<b>Por que não atender apenas quem tem maior custódia?</b> Porque o objetivo usa quatro critérios. A custódia recebe peso alto, mas não exclusivo. O ranking mostra as compensações com frequência, média aplicada e resgates.
+
+<b>O que significa C3 exatamente?</b> Segundo Leopoldo, é a média de todos os valores de aplicações/resgates dentro de um mês, em milhões de reais; aqui, agosto/2026. Os agregados foram preservados. Sem microdados, não recalculamos essa média nem supomos sinais ou tratamento dos movimentos.
+
+<b>Por que C4 é minimizado?</b> É uma preferência do objetivo comercial considerado. C4 conta dias com resgates, não volume financeiro. Outro objetivo pode exigir outro sentido ou outra definição.
+
+<b>Por que mudar um par do AHP?</b> A matriz inicial apresentou RC acima da referência. O par C3/C2 foi revisto de 6 para 4, com seu recíproco. Usamos a matriz revisada; um ajuste só matemático, sem representar o decisor, não seria justificável.
+
+<b>Por que L10 não domina L04?</b> L04 tem mais dias com aplicações. L10 compensa essa desvantagem nos outros critérios sob o vetor adotado. Por isso a comparação depende dos pesos.
+
+<b>A diferença de TOPSIS–CRITIC é robusta?</b> L10 e L08 ficam separados por cerca de 0,00652. Isso sugere cautela; não foi apresentada uma análise abrangente de incerteza dos dados nesse método.
+
+<b>Por que usar função usual no PROMETHEE?</b> É uma hipótese explícita da implementação. Ela simplifica a comparação, mas trata qualquer melhora como preferência plena. Limiar de indiferença ou outra função exigiria justificativa adicional.
+
+<b>O que a simulação demonstra?</b> A distribuição de postos sob dados fixos e uma distribuição de pesos assumida. Ela não é probabilidade de retorno financeiro nem validação causal.
+
+<b>A conclusão pode ser aplicada amanhã?</b> Não como regra automática. Faltam auditoria dos agregados por transações, autorização acadêmica documentada e restrições de atendimento. O resultado é apoio à análise e discussão.
+
+16. Reprodutibilidade e referências
+
+A memória de cálculo acompanha a matriz bruta, os sentidos, os pesos e os passos intermediários. Os valores neste relatório foram extraídos da mesma base numérica usada na apresentação. O arredondamento é de exibição: classificações e comparações devem usar precisão completa.
+
+Checagens fundamentais
+
+A matriz AHP é recíproca e tem diagonal unitária; os pesos somam 1; o autovetor satisfaz A×w ≈ λ×w. As pontuações SAW e TOPSIS ficam entre 0 e 1. A soma dos fluxos líquidos PROMETHEE é aproximadamente zero. Matrizes de aceitabilidade SMAA têm linhas e colunas somando 1. A decomposição da diferença SAW corresponde à diferença entre as pontuações totais.
+
+Fontes do estudo
+
+PELEGRINA, Guilherme Dean. Diretrizes para Desenvolvimento do Trabalho NI2. Métodos de Tomada de Decisão, Universidade Presbiteriana Mackenzie. Material da disciplina. https://graduacao.mackenzie.br/mod/resource/view.php?id=945616
+
+BASE INTERNA. Matriz de dez alternativas e quatro critérios fornecida para o estudo. Contextualização e julgamentos do decisor comunicados no desenvolvimento do trabalho. Período 01/08/2026–31/08/2026 e definição conceitual de C3 esclarecidos por Leopoldo. Sistema e data de extração não informados; agregados não recalculados com transações.
+
+Referências metodológicas
+
+SAATY, Thomas L. Decision making with the analytic hierarchy process. International Journal of Services Sciences, v. 1, n. 1, p. 83–98, 2008. https://doi.org/10.1504/IJSSCI.2008.017590
+
+DIAKOULAKI, D.; MAVROTAS, G.; PAPAYANNAKIS, L. Determining objective weights in multiple criteria problems: The CRITIC method. Computers & Operations Research, v. 22, n. 7, p. 763–770, 1995. https://doi.org/10.1016/0305-0548(94)00059-H
+
+LAHDELMA, R.; SALMINEN, P. SMAA-2: Stochastic Multicriteria Acceptability Analysis for Group Decision Making. Operations Research, v. 49, n. 3, p. 444–454, 2001. https://doi.org/10.1287/opre.49.3.444.11220
+
+BRANS, J. P.; VINCKE, Ph. A Preference Ranking Organisation Method: The PROMETHEE Method for Multiple Criteria Decision-Making. Management Science, v. 31, n. 6, p. 647–656, 1985. https://doi.org/10.1287/mnsc.31.6.647
+
+As fórmulas SAW e TOPSIS seguem as implementações explicitadas neste relatório e na memória de cálculo. O texto não atribui às fontes acadêmicas validação da base bancária ou aprovação de uso operacional.
+

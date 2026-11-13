@@ -1,0 +1,13 @@
+MÉTODOS NI2 | Pacote para revisão do grupo
+
+Excel: cada etapa determinística é aberta em fórmulas. AHP ajustado é o cenário principal (C3/C2=4). Leia as abas LEIA-ME e Auditoria.
+
+SMAA: aba SMAA_1M preserva os resultados reproduzíveis de 1.000.000 de amostras por cenário. MC_Livre e MC_Ordem demonstram todas as etapas com 2.000 amostras cada; não representam os resultados finais de 1 milhão. Para recalcular a simulação completa: pip install -r requirements.txt; python calcular_ni2_reproduzivel.py > resultados_recalculados.json
+
+Período da base: 01/08/2026–31/08/2026. Segundo Leopoldo, C3 é a média de todos os valores de aplicações/resgates dentro de um mês. Agregados preservados, sem recálculo por transações, sem supor sinais ou tratamento dos movimentos. Extração, capacidade operacional e autorização institucional continuam não documentadas. PROMETHEE usa função usual como hipótese.
+
+Relatório explicativo acompanha metodologia, resultados e roteiro de estudo. Apresentação v3 acompanha a mesma base, pesos e resultados.
+
+Validação: 99.360 fórmulas reais verificadas por dois interpretadores independentes, sem divergência material; 41 testes aprovados e 1M+1M simulações reproduzidas. Recálculo pela engine nativa do Excel não foi testado.
+
+Edição futura: o script contém a matriz X e julgamentos e NÃO lê o XLSX. Se a base mudar, sincronize esses parâmetros no script, recalcule e reimporte os resultados SMAA. Sentidos C1–C3 benefício/C4 custo são hipóteses fixas: não alterá-los sem revisar os ideais TOPSIS e a modelagem completa.
