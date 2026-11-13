@@ -11,3 +11,6 @@ Relatório explicativo acompanha metodologia, resultados e roteiro de estudo. Ap
 Validação: 99.360 fórmulas reais verificadas por dois interpretadores independentes, sem divergência material; 41 testes aprovados e 1M+1M simulações reproduzidas. Recálculo pela engine nativa do Excel não foi testado.
 
 Edição futura: o script contém a matriz X e julgamentos e NÃO lê o XLSX. Se a base mudar, sincronize esses parâmetros no script, recalcule e reimporte os resultados SMAA. Sentidos C1–C3 benefício/C4 custo são hipóteses fixas: não alterá-los sem revisar os ideais TOPSIS e a modelagem completa.
+
+
+Decisão final: priorizar L10. O estudo escolhe L10 como primeira prioridade de atendimento, com o cenário e os pesos AHP já definidos e validados. SAW 0,809566; TOPSIS 0,817896; PROMETHEE II 0,758439. A concordância não é votação entre métodos. Sensibilidade preservada: SMAA livre favorece L04 no primeiro posto; CRITIC reduz margens; C2=14,22% empata L10/L04 na trajetória SAW descrita. Esses cenários alternativos não deixam a escolha final deste estudo em aberto.

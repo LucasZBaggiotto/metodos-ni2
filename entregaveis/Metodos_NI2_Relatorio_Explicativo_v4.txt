@@ -8,6 +8,8 @@ Dez alternativas, quatro critérios e sensibilidade às preferências
 
 Professor: Guilherme Dean Pelegrina · Novembro de 2026
 
+<b>Decisão final: priorizar L10.</b> O estudo escolhe L10 como primeira prioridade de atendimento. A escolha usa o cenário e os pesos AHP já definidos e validados; não resulta de votação entre métodos. A análise de sensibilidade examina os limites dessa escolha.
+
 Como usar este material
 
 O relatório explica o problema, as entradas, as transformações e os resultados de cada método. Ele complementa a apresentação e a memória de cálculo em Excel: a leitura deve permitir refazer uma conta, interpretar uma classificação e responder por que os métodos podem discordar.
@@ -339,7 +341,7 @@ A simulação é uma análise de aceitabilidade sob hipóteses de pesos, não de
 
 Conclusão que pode ser dita em voz alta
 
-“Com pesos livres, não existe um vencedor amplamente dominante. Quando incorporamos a ordem de importância dos critérios, L10 passa a liderar na maior parte dos vetores e L04 continua relevante. Isso sustenta uma recomendação condicionada, e não uma certeza absoluta.”
+“Com pesos livres, não existe um vencedor amplamente dominante. Quando incorporamos a ordem de importância dos critérios, L10 passa a liderar na maior parte dos vetores e L04 continua relevante. A decisão do estudo é L10; esses cenários delimitam sua robustez, sem transformar a simulação em certeza absoluta.”
 
 Referência metodológica: Lahdelma e Salminen (2001).
 
@@ -384,9 +386,13 @@ Não escolher um método só porque confirma o resultado desejado
 
 SAW explicita compensações lineares. TOPSIS usa distância aos ideais e normalização vetorial. PROMETHEE usual avalia vitórias par a par e não a magnitude da vantagem. CRITIC muda os pesos para enfatizar dispersão e conflito. As diferenças são esperadas e devem ser interpretadas, não eliminadas por média arbitrária de postos.
 
-Recomendação
+Decisão final: priorizar L10
 
-Para o objetivo comercial e a preferência AHP revisada, L10 é a prioridade indicada. L04 merece atenção como alternativa sensível à importância atribuída a C2. Se o decisor valorizar mais a frequência de aplicações, o resultado pode inverter. Antes de transformar isso em rotina, devem ser definidas restrições, qualidade da base e critérios de exceção.
+O estudo escolhe L10 como primeira prioridade de atendimento para o objetivo comercial definido. A referência decisória é a preferência AHP revisada e validada pelo grupo, com C3/C2 = 4 e RC de 8,87%. Sob esse vetor, L10 lidera SAW (0,809566), TOPSIS (0,817896) e PROMETHEE II usual (fluxo líquido 0,758439). A concordância mostra estabilidade entre essas três regras de agregação, não três votos independentes: todas compartilham a base e os pesos AHP.
+
+CRITIC é contraste, não substituto automático da preferência do decisor. L10 ainda lidera SAW–CRITIC, mas a vantagem sobre L04 cai para 0,010981; em TOPSIS–CRITIC, supera L08 por apenas 0,006522. Na SMAA livre, L04 tem a maior frequência de primeiro lugar (30,27%); portanto L10 não é universalmente superior. Na SMAA ordenada, L10 lidera 61,73% dos vetores, mas L04 vence 38,27%.
+
+A decisão final é priorizar L10, com os critérios e pesos já estabelecidos. A sensibilidade mostra o alcance dessa conclusão: elevar C2 de 8,53% a 14,22%, reescalando proporcionalmente os demais pesos, empata L10 e L04 no SAW; acima desse limiar, L04 assume a liderança nessa trajetória. Esse cenário alternativo não altera a escolha final deste estudo, calculada com os pesos já definidos. Antes de implantação, devem ser definidas restrições e critérios de exceção e auditados os agregados.
 
 Uma implantação responsável começaria por validar definições e autorização de uso, registrar julgamentos e restrições e testar a recomendação em um processo acompanhado. A análise apresentada permite compreender prioridades; não mede o ganho operacional de adotar o ranking.
 
@@ -401,7 +407,7 @@ Tempo | Foco | Mensagem central
 5–8 min | SAW, TOPSIS e PROMETHEE | L10 lidera, mas os métodos não são equivalentes
 8–11 min | CRITIC e SMAA | Outra ponderação muda a ordem e a robustez
 11–13 min | L10 × L04 e sensibilidade | C2 a 14,22% empata as duas nesta trajetória
-13–15 min | Conclusão e limites | Prioridade condicional, não implantação validada
+13–15 min | Conclusão e limites | Decisão L10 e limites de implantação
 A divisão de falas entre integrantes pode acompanhar estes blocos, evitando que cada um apenas leia tabelas. Em cada método, responder nesta ordem: qual é a pergunta, quais são as entradas, o que foi calculado e o que o resultado significa. A tabela completa serve de apoio; a fala destaca o contraste mais relevante.
 
 Transições úteis
@@ -410,7 +416,7 @@ Do AHP para os rankings: “Depois de obter os pesos, precisamos escolher como a
 
 Dos rankings para robustez: “A concordância no topo não é suficiente. Vamos verificar se o resultado depende muito da ponderação.”
 
-Para a conclusão: “L10 é a indicação sob as preferências atuais, mas L04 pode assumir a liderança quando C2 ganha importância. A recomendação vem acompanhada das condições que a sustentam.”
+Para a conclusão: “A decisão final é priorizar L10. L10 lidera com o cenário e os pesos definidos. A sensibilidade identifica quando L04 poderia ultrapassá-la em outro cenário, sem deixar a escolha deste estudo em aberto.”
 
 Cuidados de linguagem
 
